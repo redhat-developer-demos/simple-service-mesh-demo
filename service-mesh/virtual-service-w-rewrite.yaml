@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: service-mesh-demo
+  namespace: service-mesh-demo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - service-mesh-demo-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /orders
+    rewrite:
+      uri: " "
+    route:
+    - destination:
+        host: orders
+        port:
+          number: 8080

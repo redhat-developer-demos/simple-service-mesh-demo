@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendations
+  namespace: service-mesh-demo
+  labels:
+    app: recommendations
+    service: recommendations
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: recommendations
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-mesh-demo-recommendations
+  namespace: service-mesh-demo
+  labels:
+    account: recommendations
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendations-food
+  namespace: service-mesh-demo
+  labels:
+    app: recommendations
+    version: food
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recommendations
+      version: food
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: recommendations
+        version: food
+    spec:
+      serviceAccountName: service-mesh-demo-recommendations
+      containers:
+      - name: reviews
+        image: quay.io/reselbob/service-mesh-recommendations:v1.0
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: RECOMMENDATION_CATEGORY
+          value: "FOOD"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendations-music
+  namespace: service-mesh-demo
+  labels:
+    app: recommendations
+    version: music
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recommendations
+      version: music
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: recommendations
+        version: music
+    spec:
+      serviceAccountName: service-mesh-demo-recommendations
+      containers:
+      - name: reviews
+        image: quay.io/reselbob/service-mesh-recommendations:v1.0
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: RECOMMENDATION_CATEGORY
+          value: "MUSIC"
+        ports:
+        - containerPort: 8080

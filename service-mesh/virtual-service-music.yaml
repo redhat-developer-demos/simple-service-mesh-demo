@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: virtual-service-music
+  namespace: service-mesh-demo
+spec:
+  hosts:
+  - recommendations
+  http:
+    - route:
+      - destination:
+          host: recommendations
+          subset: recommendation-music
+          port:
+            number: 8080
+        weight: 100
