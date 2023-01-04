@@ -1,0 +1,33 @@
+{
+  "name": "simple_mesh_recommendations",
+  "version": "1.0.0",
+  "description": "This project is a demonstration of an Express application that is to be part of a service mesh",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "stop": "pkill -15 simple_service_mesh_recommendations",
+    "test": "mocha tests/**/*Tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reselbob/simple-service-mesh.git"
+  },
+  "author": "Bob Reselman <reselbob@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reselbob/simple-service-mesh/issues"
+  },
+  "homepage": "https://github.com/reselbob/simple-service-mesh#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "lodash": "^4.17.21",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
+    "supertest": "^6.3.1"
+  }
+}

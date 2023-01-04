@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments
+  namespace: service-mesh-demo
+  labels:
+    app: payments
+    service: payments
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: payments
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: service-mesh-demo-payments
+  namespace: service-mesh-demo
+  labels:
+    account: payments
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments
+  namespace: service-mesh-demo
+  labels:
+    app: payments
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: payments
+        version: v1
+    spec:
+      serviceAccountName: service-mesh-demo-payments
+      containers:
+      - name: payments
+        image: quay.io/reselbob/service-mesh-payments:v1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080

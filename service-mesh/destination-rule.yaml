@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: service-mesh-demo-destination-rule
+  namespace: service-mesh-demo
+spec:
+  host: recommendations
+  subsets:
+  - name: recommendation-food
+    labels:
+      version: food
+  - name: recommendation-music
+    labels:
+      version: music
