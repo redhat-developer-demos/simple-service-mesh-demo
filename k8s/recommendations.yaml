@@ -46,7 +46,7 @@ spec:
       serviceAccountName: service-mesh-demo-recommendations
       containers:
       - name: reviews
-        image: quay.io/reselbob/service-mesh-recommendations:v1.0
+        image: quay.io/rhdevelopers/service-mesh-recommendations:v1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: RECOMMENDATION_CATEGORY
@@ -79,7 +79,7 @@ spec:
       serviceAccountName: service-mesh-demo-recommendations
       containers:
       - name: reviews
-        image: quay.io/reselbob/service-mesh-recommendations:v1.0
+        image: quay.io/rhdevelopers/service-mesh-recommendations:v1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: RECOMMENDATION_CATEGORY
