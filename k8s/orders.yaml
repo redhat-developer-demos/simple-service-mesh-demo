@@ -43,7 +43,7 @@ spec:
       serviceAccountName: service-mesh-demo-orders
       containers:
       - name: orders
-        image: quay.io/reselbob/service-mesh-orders:v1.0
+        image: quay.io/rhdevelopers/service-mesh-orders:v1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: PAYMENTS_URL

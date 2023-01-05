@@ -44,7 +44,7 @@ spec:
       serviceAccountName: service-mesh-demo-payments
       containers:
       - name: payments
-        image: quay.io/reselbob/service-mesh-payments:v1.0
+        image: quay.io/rhdevelopers/service-mesh-payments:v1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
